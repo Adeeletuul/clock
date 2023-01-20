@@ -72,6 +72,7 @@ function App() {
     (min, sec) => {
       console.log("startTimer", min, sec, timerOn);
       setTimerOn(true);
+      document.getElementById("beep").pause();
 
       let seconds = parseInt(min, 10) * 60 + parseInt(sec, 10);
       const now = Date.now();
