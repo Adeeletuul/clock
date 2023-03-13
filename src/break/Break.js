@@ -1,8 +1,22 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import { decreaseBreak, increaseBreak } from "./BreakActions";
 
-const Break = ({ breakTime, breakTimeCounter }) => {
+const Break = () => {
+  const breakTime = useSelector((state) => state.break.breakTime);
+
+  const dispatch = useDispatch();
+
+  const handleDecrementClick = () => {
+    dispatch(decreaseBreak());
+  };
+
+  const handleIncrementClick = () => {
+    dispatch(increaseBreak());
+  };
+
   return (
     <div id="break">
       <h2 id="break-label">Break Length</h2>
@@ -10,7 +24,7 @@ const Break = ({ breakTime, breakTimeCounter }) => {
         <button
           type="button"
           id="break-decrement"
-          onClick={() => breakTimeCounter("decrement")}
+          onClick={handleDecrementClick}
           disabled={breakTime === 1}
         >
           <RemoveCircleIcon />
@@ -19,7 +33,7 @@ const Break = ({ breakTime, breakTimeCounter }) => {
         <button
           type="button"
           id="break-increment"
-          onClick={() => breakTimeCounter("increment")}
+          onClick={handleIncrementClick}
           disabled={breakTime === 60}
         >
           <AddCircleIcon />
